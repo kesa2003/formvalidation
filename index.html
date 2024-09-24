@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+<body>
+    <form id="userForm">
+        <label for="firstname">First Name:</label><br><br>
+        <input type="text" id="firstname" required>
+        <br>
+        
+        <label for="lastname">Last Name:</label><br><br>
+        <input type="text" id="lastname" required>
+        <br>
+        
+        <label for="gender">Gender:</label><br><br>
+        <select id="gender" required>
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+        <br><br>
+        
+        <label for="age">Age:</label><br><br>
+        <input type="number" id="age" min="1" max="120" required>
+        <br><br>
+        
+        <label for="dob">Date of Birth:</label><br><br>
+        <input type="date" id="dob" required>
+        <br><br>
+        
+        <label for="email">Email:</label><br><br>
+        <input type="email" id="email" required>
+        <br><br>
+        
+        <label for="password">Password:</label><br><br>
+        <input type="password" id="password" required>
+        <br><br>
+        
+        <label for="hobbies">Hobbies:</label><br><br>
+        <input type="checkbox" id="drawing" name="hobbies" value="drawing" required>
+        <label for="drawing">drawing</label>
+        <input type="checkbox" id="painting" name="painting" value="painting" required>
+        <label for="painting">painting</label>
+        <input type="checkbox" id="dancing" name="dancing" value="dancing" required>
+        <label for="dancing">dancing</label>
+        <br>
+        
+        <label for="address">Address:</label><br>
+        <textarea id="address"></textarea>
+        <br>
+        
+        <button type="submit">Submit</button>
+        <button type="reset">reset</button>
+    </form>
+
+    <script src="validation.js">
+document.getElementById('userForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+    
+    // Gather form values
+    const firstname = document.getElementById('firstname').value.trim();
+    const lastname = document.getElementById('lastname').value.trim();
+    const gender = document.getElementById('gender').value;
+    const age = document.getElementById('age').value;
+    const dob = document.getElementById('dob').value;
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const hobbies = document.getElementById('hobbies').value.trim();
+    const address = document.getElementById('address').value.trim();
+    
+    // Basic validation
+    if (!firstname || !lastname || !gender || !age || !dob || !email || !password) {
+        alert("Please fill in all required fields.");
+        return;
+    }
+    
+    if (age < 1 || age > 120) {
+        alert("Please enter a valid age.");
+        return;
+    }
+    
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+    
+    // If all validations pass
+    alert("Form submitted successfully!");
+    // Here you can proceed to submit the form or handle the data as needed
+});
+</script>
+</body>
+</html>
